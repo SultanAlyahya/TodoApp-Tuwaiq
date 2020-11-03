@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Todo: Equatable {
+class Todo: Equatable, Codable {
 	static func == (lhs: Todo, rhs: Todo) -> Bool {
 		return lhs.title == rhs.title && lhs.date == rhs.date
 	}

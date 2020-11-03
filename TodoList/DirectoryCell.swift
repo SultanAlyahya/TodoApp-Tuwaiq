@@ -15,8 +15,8 @@ class DirectoryCell: UICollectionViewCell {
 	
 	func uddate(_ todoList: TodoList){
 		directoryTitle.text = todoList.DirectoryName
-		numberOfTasks.text = String(todoList.numberOfTasks)
-		numberOfComletedTasks.text = String(todoList.numberOfComletedTasks)
+		numberOfTasks.text = "All Tasks: \(todoList.numberOfTasks)"
+		numberOfComletedTasks.text = "Completed Tasks: \(todoList.numberOfComletedTasks)"
 	}
 		
 }

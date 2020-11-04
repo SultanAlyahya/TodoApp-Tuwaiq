@@ -54,6 +54,11 @@ class TodoListViewController: UITableViewController {
 
 
 extension TodoListViewController: UpdateTodoListDelegate {
+	func reloadTodoList() {
+		tableView.reloadData()
+	}
+	
+	
 	func updateTodo(todo: Todo) {
 		if let index = todoList.todos.firstIndex(of: todo){
 			let indexPath = IndexPath(row: index, section: 0)
@@ -84,8 +89,10 @@ extension TodoListViewController: UpdateTodoListDelegate {
 	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		
 		let context: UIContextualAction
+		let notifivationContext: UIContextualAction
+		let todo = todoList.todos[indexPath.row]
 		
-		if todoList.todos[indexPath.row].isCompleted{
+		if todo.isCompleted{
 			context =  UIContextualAction(style: .normal, title: "Uncheck Todo", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
 				print("Update action ...")
 				self.changeItemToChecked(indexPath)
@@ -102,13 +109,38 @@ extension TodoListViewController: UpdateTodoListDelegate {
 				success(true)
 			})
 			context.backgroundColor = .green
+			
 		}
 		
-		return UISwipeActionsConfiguration(actions: [context])
+		if todo.needNotification {
+			notifivationContext =  UIContextualAction(style: .normal, title: nil, handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+				print("Update action ...")
+				self.toggleNotification(indexPath)
+				success(true)
+			})
+			notifivationContext.backgroundColor = .systemRed
+			notifivationContext.image = UIImage(systemName: "alarm")
+		}
+		else {
+			notifivationContext =  UIContextualAction(style: .normal, title: nil, handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+				print("Update action ...")
+				self.toggleNotification(indexPath)
+				success(true)
+			})
+			notifivationContext.backgroundColor = .systemYellow
+			notifivationContext.image = UIImage(systemName: "alarm")
+		}
+		
+		return UISwipeActionsConfiguration(actions: [context, notifivationContext])
 	}
 	
 	func changeItemToChecked(_ indexPath: IndexPath){
 		todoList.toggleCheck(indexPath.row)
+		tableView.reloadRows(at: [indexPath], with: .automatic)
+	}
+	
+	func toggleNotification(_ indexPath: IndexPath){
+		todoList.todos[indexPath.row].toggleNotification()
 		tableView.reloadRows(at: [indexPath], with: .automatic)
 	}
 	

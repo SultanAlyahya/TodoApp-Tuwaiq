@@ -10,4 +10,5 @@ import Foundation
 protocol UpdateTodoListDelegate {
 	func addTodo(todo: Todo)
 	func updateTodo(todo: Todo)
+	func reloadTodoList()
 }

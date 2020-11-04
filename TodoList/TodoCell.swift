@@ -14,6 +14,7 @@ class TodoCell: UITableViewCell {
 	@IBOutlet var todoDescription: UILabel!
 	
 	@IBOutlet var todoCheckImage: UIImageView!
+	@IBOutlet var notificationImage: UIImageView!
 	
 	func setTodo(todo: Todo){
 		
@@ -26,10 +27,17 @@ class TodoCell: UITableViewCell {
 			todoDate.textColor = .red
 		}
 		if todo.isCompleted{
-			todoCheckImage.image = .checkmark
+			todoCheckImage.image = UIImage(systemName: "checkmark.seal.fill")
 		} else {
-			todoCheckImage.image = .none
+			todoCheckImage.image = nil
 		}
+		if todo.needNotification{
+			notificationImage.image = UIImage(systemName: "alarm.fill")
+		} else {
+			notificationImage.image = nil
+		}
+		
+		
 	}
 	
 	func chech(){

@@ -17,6 +17,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
 		// This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 		
+		let center = UNUserNotificationCenter.current()
+		
+		center.requestAuthorization(options: [.alert, .badge, .sound]) {
+			(granted, error) in
+		  if granted {
+			  print("can access the notificaion")
+		  } else {
+			print("can't access the notificaion")
+		  }
+		}
+		
 		let rootViewController = window?.rootViewController as! UINavigationController
 		let directoryListController = rootViewController.topViewController as! DirectoryViewCntroller
 		

@@ -28,7 +28,7 @@ class TodoCell: UITableViewCell {
 		if todo.isCompleted{
 			todoCheckImage.image = .checkmark
 		} else {
-			todoCheckImage.image = nil
+			todoCheckImage.image = .none
 		}
 	}
 	

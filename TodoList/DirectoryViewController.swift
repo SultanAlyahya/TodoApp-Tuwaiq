@@ -14,12 +14,14 @@ class DirectoryViewCntroller: UIViewController {
 	var directoryListStore: DirectoryListStore!
 	var todoList: TodoList!
 	var updateCollection: UpdateCollectionDelegate!
+	@IBOutlet var spinner: UIActivityIndicatorView!
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
 			case "mbDirectoryList":
 				let directoryListViewController = segue.destination as! DirectoryListViewController
 				updateCollection = directoryListViewController
+				directoryListViewController.updateCollection = updateCollection
 				directoryListViewController.directoryListStore = directoryListStore
 				//todoList = directoryListViewController.todoList
 			case "showTodo":
@@ -30,7 +32,7 @@ class DirectoryViewCntroller: UIViewController {
 				addDirectoryViewController.directoryListStore = directoryListStore
 				addDirectoryViewController.updateCollection = updateCollection
 			default:
-				print(segue.identifier)
+				print(segue.identifier!)
 				fatalError("InvalidSegue")
 		}
 	}
@@ -38,9 +40,19 @@ class DirectoryViewCntroller: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		let notificatioCenter = NotificationCenter.default
+		notificatioCenter.addObserver(self,
+									  selector: #selector(reloadCollection(_:)),
+									  name: Notification.Name(rawValue: "directoryLoaded"),
+									  object: nil)
 		
-		//addButton.layer.cornerRadius = CGFloat(20.0)
-		
+	}
+	
+	@objc func reloadCollection(_ notification: Notification){
+		OperationQueue.main.addOperation {
+			self.updateCollection.reloadCollection()
+			self.spinner.stopAnimating()
+		}
 	}
 }
 

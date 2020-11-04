@@ -26,6 +26,10 @@ class TodoList: Equatable, Codable {
 		numberOfTasks += 1
 	}
 	func removeTodo(index: Int){
+		numberOfTasks -= 1
+		if todos[index].isCompleted {
+			numberOfComletedTasks -= 1
+		}
 		todos.remove(at: index)
 	}
 	

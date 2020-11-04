@@ -13,6 +13,24 @@ class TodoViewController: UIViewController {
 	var todoListDelegate: UpdateTodoListDelegate!
 	var updateCollection: UpdateCollectionDelegate!
 	
+	@IBAction func filterBy(_ sender: UISegmentedControl) {
+		switch sender.selectedSegmentIndex {
+			case 0:
+				todoList.todos.sort{ $0.dateCreated < $1.dateCreated }
+				todoListDelegate.reloadTodoList()
+			
+			case 1:
+				todoList.todos.sort{ $0.firstTitleChar < $1.firstTitleChar }
+				todoListDelegate.reloadTodoList()
+			
+			case 2:
+				todoList.todos.sort{ $0.date < $1.date }
+				todoListDelegate.reloadTodoList()
+			default:
+				break
+		}
+	}
+	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
 			case "showTodoList":

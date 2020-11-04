@@ -12,18 +12,24 @@ class DirectoryListStore {
 	var todoLists = [TodoList]()
 	
 	init() {
-		do{
-			let todoData = try Data(contentsOf: todosURL)
-			let decoder = PropertyListDecoder()
-			let todos = try decoder.decode([TodoList].self, from: todoData)
-			todoLists = todos
-		}
-		catch {
-			print("error: \(error)")
+		DispatchQueue.global(qos: .background).async {
+			do{
+				let todoData = try Data(contentsOf: self.todosURL)
+				let decoder = PropertyListDecoder()
+				let todos = try decoder.decode([TodoList].self, from: todoData)
+				self.todoLists = todos
+			}
+			catch {
+				print("error: \(error)")
+			}
+			let notification = Notification(name: Notification.Name(rawValue: "directoryLoaded"),
+											object: self,
+											userInfo: nil)
+			NotificationCenter.default.post(notification)
 		}
 		let notificationCenter = NotificationCenter.default
 		notificationCenter.addObserver(self,
-									   selector: #selector(saveTodos),
+									   selector: #selector(self.saveTodos),
 									   name: UIScene.didEnterBackgroundNotification,
 									   object: nil)
 	}
@@ -40,14 +46,17 @@ class DirectoryListStore {
 	
 	
 	@objc func saveTodos(){
-		do{
-			let encoder = PropertyListEncoder()
-			let todoData = try encoder.encode(todoLists)
-			try todoData.write(to: todosURL, options: [.atomic])
-			print("saved")
-		} catch {
-			print("error: \(error)")
+		
+		DispatchQueue.global(qos: .background).async {
+			do{
+				let encoder = PropertyListEncoder()
+				let todoData = try encoder.encode(self.todoLists)
+				try todoData.write(to: self.todosURL, options: [.atomic])
+					print("saved")
+				} catch {
+					print("error: \(error)")
+				}
+			}
 		}
-	}
 	
 }

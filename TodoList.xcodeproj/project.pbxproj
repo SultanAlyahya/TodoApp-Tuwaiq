@@ -25,6 +25,7 @@
 		7FD84CBF2550A7A900B4EDFA /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD84CBE2550A7A900B4EDFA /* TodoViewController.swift */; };
 		7FD84CC22550ABDB00B4EDFA /* UpdateTodoListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD84CC12550ABDB00B4EDFA /* UpdateTodoListDelegate.swift */; };
 		7FD84CC52550AD2200B4EDFA /* AddTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD84CC42550AD2200B4EDFA /* AddTodoViewController.swift */; };
+		7FD84CC82552B41900B4EDFA /* DirectoryCollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD84CC72552B41700B4EDFA /* DirectoryCollectionHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		7FD84CBE2550A7A900B4EDFA /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 		7FD84CC12550ABDB00B4EDFA /* UpdateTodoListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTodoListDelegate.swift; sourceTree = "<group>"; };
 		7FD84CC42550AD2200B4EDFA /* AddTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoViewController.swift; sourceTree = "<group>"; };
+		7FD84CC72552B41700B4EDFA /* DirectoryCollectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryCollectionHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				7FD84CBE2550A7A900B4EDFA /* TodoViewController.swift */,
 				7FD84CC12550ABDB00B4EDFA /* UpdateTodoListDelegate.swift */,
 				7FD84CC42550AD2200B4EDFA /* AddTodoViewController.swift */,
+				7FD84CC72552B41700B4EDFA /* DirectoryCollectionHeader.swift */,
 			);
 			path = TodoList;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 				7FD84CC52550AD2200B4EDFA /* AddTodoViewController.swift in Sources */,
 				7F2E298A255022A800492F67 /* DirectoryViewController.swift in Sources */,
 				7F2E2977254F035D00492F67 /* DirectoryListViewController.swift in Sources */,
+				7FD84CC82552B41900B4EDFA /* DirectoryCollectionHeader.swift in Sources */,
 				7F2E29962550577500492F67 /* TodoList.swift in Sources */,
 				7F2E29A425506E5600492F67 /* DirectoryCell.swift in Sources */,
 				7F2E2973254F035D00492F67 /* AppDelegate.swift in Sources */,

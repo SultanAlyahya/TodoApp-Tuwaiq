@@ -11,6 +11,7 @@ class TodoListViewController: UITableViewController {
 	
 	var todoList: TodoList!
 	var todoListDelegate: UpdateTodoListDelegate!
+	var updateCollection: UpdateCollectionDelegate!
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
@@ -40,7 +41,9 @@ class TodoListViewController: UITableViewController {
 		let todo = todoList.todos[indexPath.item]
 		
 		cell.setTodo(todo: todo)
-		
+		cell.layer.borderWidth = 2
+		cell.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
+		cell.layer.cornerRadius = 10
 		return cell
 	}
 	
@@ -63,6 +66,7 @@ extension TodoListViewController: UpdateTodoListDelegate {
 		if let index = todoList.todos.firstIndex(of: todo){
 			let indexPath = IndexPath(row: index, section: 0)
 			tableView.insertRows(at: [indexPath], with: .automatic)
+			updateCollection.updateTodoList(todoList)
 		}
 	}
 	
@@ -85,6 +89,7 @@ extension TodoListViewController: UpdateTodoListDelegate {
 			context =  UIContextualAction(style: .normal, title: "Uncheck Todo", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
 				print("Update action ...")
 				self.changeItemToChecked(indexPath)
+				self.updateCollection.updateTodoList(self.todoList)
 				success(true)
 			})
 			context.backgroundColor = .red
@@ -93,6 +98,7 @@ extension TodoListViewController: UpdateTodoListDelegate {
 			context =  UIContextualAction(style: .normal, title: "Check Todo", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
 				print("Update action ...")
 				self.changeItemToChecked(indexPath)
+				self.updateCollection.updateTodoList(self.todoList)
 				success(true)
 			})
 			context.backgroundColor = .green

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TodoList: Equatable {
+class TodoList: Equatable, Codable {
 	static func == (lhs: TodoList, rhs: TodoList) -> Bool {
 		lhs.DirectoryName == rhs.DirectoryName
 	}
@@ -30,7 +30,14 @@ class TodoList: Equatable {
 	}
 	
 	func toggleCheck(_ index: Int){
-		todos[index].isCompleted = !todos[index].isCompleted
+		let completed = todos[index].isCompleted
+		if completed {
+			todos[index].isCompleted = false
+			numberOfComletedTasks -= 1
+		} else {
+			todos[index].isCompleted = true
+			numberOfComletedTasks += 1
+		}
 	}
 	
 }

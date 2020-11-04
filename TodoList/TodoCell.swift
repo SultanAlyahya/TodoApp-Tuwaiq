@@ -22,6 +22,9 @@ class TodoCell: UITableViewCell {
 		todoTitle.text = todo.title
 		todoDate.text = dateFormatter.string(from: todo.date)
 		todoDescription.text = todo.description
+		if todo.date < Date(){
+			todoDate.textColor = .red
+		}
 		if todo.isCompleted{
 			todoCheckImage.image = .checkmark
 		} else {

@@ -84,7 +84,7 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="directoryView" id="01O-Og-F8N" customClass="DirectoryCollectionHeader" customModule="TodoList" customModuleProvider="target">
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="directoryView" id="01O-Og-F8N" customClass="CategoryCollectionHeader" customModule="TodoList" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -431,7 +431,7 @@
         <!--Add Category-->
         <scene sceneID="2r0-Yx-p7P">
             <objects>
-                <viewController id="12N-bl-ore" customClass="AddDirectoryViewController" customModule="TodoList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="12N-bl-ore" customClass="AddCategoryViewController" customModule="TodoList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ogo-37-zGP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -533,10 +533,30 @@
                                 <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
                                 <color key="color" red="0.58817940950000003" green="0.71393734220000005" blue="0.80111217499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LCC-Of-FBd">
+                                <rect key="frame" x="100" y="108" width="214" height="75"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cant load data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ca-v3-g77">
+                                        <rect key="frame" x="53" y="27" width="108.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5926442259266721" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="8Ca-v3-g77" firstAttribute="centerY" secondItem="LCC-Of-FBd" secondAttribute="centerY" id="7U3-cL-j2D"/>
+                                    <constraint firstAttribute="height" constant="75" id="HcF-Yc-GxH"/>
+                                    <constraint firstItem="8Ca-v3-g77" firstAttribute="centerX" secondItem="LCC-Of-FBd" secondAttribute="centerX" id="OkN-bV-8Or"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rXb-Ld-tHo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="rXb-Ld-tHo" firstAttribute="trailing" secondItem="LCC-Of-FBd" secondAttribute="trailing" constant="100" id="BBV-we-99v"/>
+                            <constraint firstItem="LCC-Of-FBd" firstAttribute="top" secondItem="rXb-Ld-tHo" secondAttribute="top" constant="20" id="BnB-6G-hAw"/>
+                            <constraint firstItem="LCC-Of-FBd" firstAttribute="leading" secondItem="rXb-Ld-tHo" secondAttribute="leading" constant="100" id="FMp-3L-cAw"/>
                             <constraint firstItem="PDd-io-8wa" firstAttribute="centerX" secondItem="uCz-um-vCw" secondAttribute="centerX" id="Ktb-Ev-LJ4"/>
                             <constraint firstAttribute="bottom" secondItem="O09-rj-kg7" secondAttribute="bottom" id="P2c-7c-f3u"/>
                             <constraint firstItem="rXb-Ld-tHo" firstAttribute="trailing" secondItem="ypV-AG-6r1" secondAttribute="trailing" constant="30" id="Vm4-38-1RB"/>
@@ -551,6 +571,7 @@
                     <navigationItem key="navigationItem" title="Categories" id="7uX-a4-gdW"/>
                     <connections>
                         <outlet property="addButton" destination="ypV-AG-6r1" id="ai5-cD-7Ls"/>
+                        <outlet property="loadProblemView" destination="LCC-Of-FBd" id="IsQ-Ye-8Kg"/>
                         <outlet property="spinner" destination="PDd-io-8wa" id="WtK-9h-zh6"/>
                     </connections>
                 </viewController>

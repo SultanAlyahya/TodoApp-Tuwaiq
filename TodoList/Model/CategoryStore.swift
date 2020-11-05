@@ -7,17 +7,17 @@
 
 import UIKit
 
-class DirectoryListStore {
+class CategoryStore {
 	
-	var todoLists = [TodoList]()
+	var categories = [Category]()
 	
 	init() {
 		DispatchQueue.global(qos: .background).async {
 			do{
 				let todoData = try Data(contentsOf: self.todosURL)
 				let decoder = PropertyListDecoder()
-				let todos = try decoder.decode([TodoList].self, from: todoData)
-				self.todoLists = todos
+				let todos = try decoder.decode([Category].self, from: todoData)
+				self.categories = todos
 			}
 			catch {
 				print("error: \(error)")
@@ -40,8 +40,8 @@ class DirectoryListStore {
 		return directory.appendingPathComponent("todos.plist")
 	}
 	
-	func addTodoList(todoList: TodoList){
-		todoLists.append(todoList)
+	func addTodoList(todoList: Category){
+		categories.append(todoList)
 	}
 	
 	
@@ -50,7 +50,7 @@ class DirectoryListStore {
 		DispatchQueue.global(qos: .background).async {
 			do{
 				let encoder = PropertyListEncoder()
-				let todoData = try encoder.encode(self.todoLists)
+				let todoData = try encoder.encode(self.categories)
 				try todoData.write(to: self.todosURL, options: [.atomic])
 					print("saved")
 				} catch {

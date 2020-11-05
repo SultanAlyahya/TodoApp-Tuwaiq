@@ -9,15 +9,15 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
 	
-	var todoList: TodoList!
-	var todoListDelegate: UpdateTodoListDelegate!
-	var updateCollection: UpdateCollectionDelegate!
+	var category: Category!
+	var todoListDelegate: CategoryDelegate!
+	var categoryStoreDelegate: CategoryStoreDelegate!
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
 			case "showEditTodo":
 				if let row = tableView.indexPathForSelectedRow?.row {
-					let todo = todoList.todos[row]
+					let todo = category.todoList[row]
 					let addTodoViewController = segue.destination as! AddTodoViewController
 					addTodoViewController.todo = todo
 					addTodoViewController.isEdit = true
@@ -30,7 +30,7 @@ class TodoListViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		//print(todoList.DirectoryName)
-		return todoList.todos.count
+		return category.todoList.count
 	}
 	
 	
@@ -38,7 +38,7 @@ class TodoListViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath) as! TodoCell
 		
-		let todo = todoList.todos[indexPath.item]
+		let todo = category.todoList[indexPath.item]
 		
 		cell.setTodo(todo: todo)
 		cell.layer.borderWidth = 2
@@ -53,25 +53,25 @@ class TodoListViewController: UITableViewController {
 }
 
 
-extension TodoListViewController: UpdateTodoListDelegate {
-	func reloadTodoList() {
+extension TodoListViewController: CategoryDelegate {
+	func reloadCategory() {
 		tableView.reloadData()
 	}
 	
 	
 	func updateTodo(todo: Todo) {
-		if let index = todoList.todos.firstIndex(of: todo){
+		if let index = category.todoList.firstIndex(of: todo){
 			let indexPath = IndexPath(row: index, section: 0)
 			tableView.reloadRows(at: [indexPath], with: .automatic)
 		}
 	}
 	
 	func addTodo(todo: Todo) {
-		todoList.addTodo(todo: todo)
-		if let index = todoList.todos.firstIndex(of: todo){
+		category.addTodo(todo: todo)
+		if let index = category.todoList.firstIndex(of: todo){
 			let indexPath = IndexPath(row: index, section: 0)
 			tableView.insertRows(at: [indexPath], with: .automatic)
-			updateCollection.updateTodoList(todoList)
+			categoryStoreDelegate.updateCategory(category)
 		}
 	}
 	
@@ -80,7 +80,7 @@ extension TodoListViewController: UpdateTodoListDelegate {
 	}
 	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
-			todoList.removeTodo(index: indexPath.row)
+			category.removeTodo(index: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: .automatic)
 		}
 		
@@ -90,13 +90,13 @@ extension TodoListViewController: UpdateTodoListDelegate {
 		
 		let context: UIContextualAction
 		let notifivationContext: UIContextualAction
-		let todo = todoList.todos[indexPath.row]
+		let todo = category.todoList[indexPath.row]
 		
 		if todo.isCompleted{
 			context =  UIContextualAction(style: .normal, title: "Uncheck Todo", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
 				print("Update action ...")
 				self.changeItemToChecked(indexPath)
-				self.updateCollection.updateTodoList(self.todoList)
+				self.categoryStoreDelegate.updateCategory(self.category)
 				success(true)
 			})
 			context.backgroundColor = .red
@@ -105,42 +105,39 @@ extension TodoListViewController: UpdateTodoListDelegate {
 			context =  UIContextualAction(style: .normal, title: "Check Todo", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
 				print("Update action ...")
 				self.changeItemToChecked(indexPath)
-				self.updateCollection.updateTodoList(self.todoList)
+				self.categoryStoreDelegate.updateCategory(self.category)
 				success(true)
 			})
 			context.backgroundColor = .green
 			
 		}
 		
+		
+		notifivationContext =  UIContextualAction(style: .normal, title: nil, handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+			print("Update action ...")
+			self.toggleNotification(indexPath)
+			success(true)
+		})
+		notifivationContext.image = UIImage(systemName: "alarm")
 		if todo.needNotification {
-			notifivationContext =  UIContextualAction(style: .normal, title: nil, handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-				print("Update action ...")
-				self.toggleNotification(indexPath)
-				success(true)
-			})
 			notifivationContext.backgroundColor = .systemRed
-			notifivationContext.image = UIImage(systemName: "alarm")
+			
 		}
 		else {
-			notifivationContext =  UIContextualAction(style: .normal, title: nil, handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-				print("Update action ...")
-				self.toggleNotification(indexPath)
-				success(true)
-			})
 			notifivationContext.backgroundColor = .systemYellow
-			notifivationContext.image = UIImage(systemName: "alarm")
 		}
+			
 		
 		return UISwipeActionsConfiguration(actions: [context, notifivationContext])
 	}
 	
 	func changeItemToChecked(_ indexPath: IndexPath){
-		todoList.toggleCheck(indexPath.row)
+		category.toggleCheck(indexPath.row)
 		tableView.reloadRows(at: [indexPath], with: .automatic)
 	}
 	
 	func toggleNotification(_ indexPath: IndexPath){
-		todoList.todos[indexPath.row].toggleNotification()
+		category.toggleNotification(indexPath.row)
 		tableView.reloadRows(at: [indexPath], with: .automatic)
 	}
 	

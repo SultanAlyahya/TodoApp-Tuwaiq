@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol UpdateTodoListDelegate {
+protocol CategoryDelegate {
 	func addTodo(todo: Todo)
 	func updateTodo(todo: Todo)
-	func reloadTodoList()
+	func reloadCategory()
 }

@@ -7,24 +7,24 @@
 
 import UIKit
 
-class DirectoryListViewController: UICollectionViewController {
+class CategoryListViewController: UICollectionViewController {
 	
-	var directoryListStore: DirectoryListStore!
-	var updateCollection: UpdateCollectionDelegate!
+	var categoryStore: CategoryStore!
+	var categoryStoreDelegate: CategoryStoreDelegate!
 	var collectionHeader: DirectoryCollectionHeader!
 	var createdTasks: Int {
 		var tasks = 0
-		directoryListStore.todoLists.forEach{
-			todoList in
-			tasks += todoList.numberOfTasks
+		categoryStore.categories.forEach{
+			category in
+			tasks += category.numberOfTasks
 		}
 		return tasks
 	}
 	var completedTasks: Int {
 		var tasks = 0
-		directoryListStore.todoLists.forEach{
-			todoList in
-			tasks += todoList.numberOfComletedTasks
+		categoryStore.categories.forEach{
+			category in
+			tasks += category.numberOfComletedTasks
 		}
 		return tasks
 	}
@@ -33,12 +33,12 @@ class DirectoryListViewController: UICollectionViewController {
 	
 	
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return directoryListStore.todoLists.count
+		return categoryStore.categories.count
 	}
 	
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodoList", for: indexPath) as! DirectoryCell
-		cell.uddate(directoryListStore.todoLists[indexPath.item])
+		cell.uddate(categoryStore.categories[indexPath.item])
 		cell.layer.cornerRadius = 10
 		return cell
 	}
@@ -65,9 +65,9 @@ class DirectoryListViewController: UICollectionViewController {
 		switch segue.identifier {
 			case "showTodo":
 				let todoListListViewController = segue.destination as! TodoViewController
-				let todoList = directoryListStore.todoLists[(collectionView.indexPathsForSelectedItems?.first!.item)!]
-				todoListListViewController.todoList = todoList
-				todoListListViewController.updateCollection = updateCollection
+				let todoList = categoryStore.categories[(collectionView.indexPathsForSelectedItems?.first!.item)!]
+				todoListListViewController.catagory = todoList
+				todoListListViewController.categoryStoreDelegate = categoryStoreDelegate
 			default:
 				break
 		}
@@ -75,13 +75,13 @@ class DirectoryListViewController: UICollectionViewController {
 	
 }
 
-extension DirectoryListViewController: UpdateCollectionDelegate{
-	func reloadCollection() {
+extension CategoryListViewController: CategoryStoreDelegate{
+	func reloadCategoryStore() {
 		self.collectionView.reloadData()
 	}
 	
-	func updateTodoList(_ todoList: TodoList) {
-		if let index = directoryListStore.todoLists.firstIndex(of: todoList) {
+	func updateCategory(_ category: Category) {
+		if let index = categoryStore.categories.firstIndex(of: category) {
 			let indexPath = IndexPath(item: index, section: 0)
 			collectionView.reloadItems(at: [indexPath])
 			collectionHeader.updateData(createdTasks, completedTasks)
@@ -89,9 +89,9 @@ extension DirectoryListViewController: UpdateCollectionDelegate{
 	}
 	
 	
-	func deleteTodoList(_ todoList: TodoList) {
-		if let index = directoryListStore.todoLists.firstIndex(of: todoList) {
-			directoryListStore.todoLists.remove(at: index)
+	func deleteCategory(_ category: Category) {
+		if let index = categoryStore.categories.firstIndex(of: category) {
+			categoryStore.categories.remove(at: index)
 			let indexPath = IndexPath(item: index, section: 0)
 			collectionView.deleteItems(at: [indexPath])
 			collectionHeader.updateData(createdTasks, completedTasks)
@@ -99,10 +99,10 @@ extension DirectoryListViewController: UpdateCollectionDelegate{
 	}
 	
 	
-	func addTodoList(_ todoListName: String) {
-		let todoList = TodoList(DirectoryName: todoListName)
-		directoryListStore.addTodoList(todoList: todoList)
-		if let index = directoryListStore.todoLists.firstIndex(of: todoList) {
+	func addCategory(_ categoryName: String) {
+		let todoList = Category(DirectoryName: categoryName)
+		categoryStore.addTodoList(todoList: todoList)
+		if let index = categoryStore.categories.firstIndex(of: todoList) {
 			let indexPath = IndexPath(item: index, section: 0)
 			collectionView.insertItems(at: [indexPath])
 			collectionHeader.updateData(createdTasks, completedTasks)

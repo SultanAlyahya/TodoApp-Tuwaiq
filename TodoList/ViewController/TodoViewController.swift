@@ -9,23 +9,23 @@ import UIKit
 
 class TodoViewController: UIViewController {
 	
-	var todoList: TodoList!
-	var todoListDelegate: UpdateTodoListDelegate!
-	var updateCollection: UpdateCollectionDelegate!
+	var catagory: Category!
+	var todoListDelegate: CategoryDelegate!
+	var categoryStoreDelegate: CategoryStoreDelegate!
 	
 	@IBAction func filterBy(_ sender: UISegmentedControl) {
 		switch sender.selectedSegmentIndex {
 			case 0:
-				todoList.todos.sort{ $0.dateCreated < $1.dateCreated }
-				todoListDelegate.reloadTodoList()
+				catagory.todoList.sort{ $0.dateCreated < $1.dateCreated }
+				todoListDelegate.reloadCategory()
 			
 			case 1:
-				todoList.todos.sort{ $0.firstTitleChar < $1.firstTitleChar }
-				todoListDelegate.reloadTodoList()
+				catagory.todoList.sort{ $0.firstTitleChar < $1.firstTitleChar }
+				todoListDelegate.reloadCategory()
 			
 			case 2:
-				todoList.todos.sort{ $0.date < $1.date }
-				todoListDelegate.reloadTodoList()
+				catagory.todoList.sort{ $0.date < $1.date }
+				todoListDelegate.reloadCategory()
 			default:
 				break
 		}
@@ -35,10 +35,10 @@ class TodoViewController: UIViewController {
 		switch segue.identifier {
 			case "showTodoList":
 				let todoListListViewController = segue.destination as! TodoListViewController
-				todoListListViewController.todoList = todoList
+				todoListListViewController.category = catagory
 				todoListDelegate = todoListListViewController
 				todoListListViewController.todoListDelegate = todoListDelegate
-				todoListListViewController.updateCollection = updateCollection
+				todoListListViewController.categoryStoreDelegate = categoryStoreDelegate
 				break
 			case "showAddTodo":
 				let addTodoViewController = segue.destination as! AddTodoViewController
@@ -47,7 +47,7 @@ class TodoViewController: UIViewController {
 			case "showEditTodo":
 				break
 			default:
-				print(segue.identifier)
+				print(segue.identifier!)
 				fatalError("InvalidSegue")
 		}
 	}
@@ -61,12 +61,12 @@ class TodoViewController: UIViewController {
 		alertController.addAction(alertCancel)
 		let alertDelete = UIAlertAction(title: "Delete", style: .destructive){
 			_ in
-			self.updateCollection.deleteTodoList(self.todoList)
+			self.categoryStoreDelegate.deleteCategory(self.catagory)
 			self.navigationController?.popViewController(animated: true)
 		}
 		alertController.addAction(alertDelete)
 		present(alertController, animated: true, completion: nil)
-		updateCollection.deleteTodoList(todoList)
+		categoryStoreDelegate.deleteCategory(catagory)
 		navigationController?.popViewController(animated: true)
 	}
 	

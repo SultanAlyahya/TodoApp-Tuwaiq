@@ -29,9 +29,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		}
 		
 		let rootViewController = window?.rootViewController as! UINavigationController
-		let directoryListController = rootViewController.topViewController as! DirectoryViewCntroller
+		let directoryListController = rootViewController.topViewController as! CategoryViewCntroller
 		
-		directoryListController.directoryListStore = DirectoryListStore()
+		directoryListController.categoryStore = CategoryStore()
 		
 		guard let _ = (scene as? UIWindowScene) else { return }
 	}

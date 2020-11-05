@@ -9,7 +9,7 @@ import UIKit
 
 class AddTodoViewController: UIViewController {
 	
-	var todoListDelegate: UpdateTodoListDelegate!
+	var todoListDelegate: CategoryDelegate!
 	var isEdit: Bool!
 	var todo: Todo!
 	

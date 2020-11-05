@@ -36,30 +36,31 @@ class Todo: Equatable, Codable {
 		self.date = date
 	}
 	
-		func toggleNotification(){
-			
-			let center = UNUserNotificationCenter.current()
-			if needNotification {
-				center.removePendingNotificationRequests(withIdentifiers: [notificationID])
-				needNotification = false
-			}
-			else {
-				let content = UNMutableNotificationContent()
-				content.title = title
-				content.body = "the due date for this Todo has been approaches"
-				content.categoryIdentifier = "alarm"
-				content.sound = UNNotificationSound.default
+	func removeNotification(){
+		let center = UNUserNotificationCenter.current()
+		center.removePendingNotificationRequests(withIdentifiers: [notificationID])
+		needNotification = false
+		print("notification removed")
+	}
+	
+	func sendNotification(){
+		let center = UNUserNotificationCenter.current()
 		
-				let dateComponents = Calendar.current.dateComponents([.day, .hour, .minute, .second], from: date)
-				
-				let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+		let content = UNMutableNotificationContent()
+		content.title = title
+		content.body = "the due date for this Todo has been approaches"
+		content.categoryIdentifier = "alarm"
+		content.sound = UNNotificationSound.default
+
+		let dateComponents = Calendar.current.dateComponents([.day, .hour, .minute, .second], from: date)
 		
-				let request = UNNotificationRequest(identifier: notificationID, content: content, trigger: trigger)
-				center.add(request)
-				needNotification = true
-			}
-			
-		}
+		let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+
+		let request = UNNotificationRequest(identifier: notificationID, content: content, trigger: trigger)
+		center.add(request)
+		needNotification = true
+		print("notification active")
+	}
 	
 }
 //init (title: String, description: String, date: Date){

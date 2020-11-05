@@ -16,7 +16,7 @@ class DirectoryCell: UICollectionViewCell {
 //	@IBOutlet var backgroundProgressLine: UIView!
 	@IBOutlet var progressLine: UIProgressView!
 	
-	func uddate(_ todoList: TodoList){
+	func uddate(_ todoList: Category){
 		directoryTitle.text = todoList.DirectoryName
 		numberOfTasks.text = "All Tasks: \(todoList.numberOfTasks)"
 		numberOfComletedTasks.text = "Completed Tasks: \(todoList.numberOfComletedTasks)"

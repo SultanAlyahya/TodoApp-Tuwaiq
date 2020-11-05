@@ -9,15 +9,15 @@ import UIKit
 
 class AddDirectoryViewController: UIViewController {
 	
-	var directoryListStore: DirectoryListStore!
-	var updateCollection: UpdateCollectionDelegate!
+	var categoryStore: CategoryStore!
+	var categoryStoreDelegate: CategoryStoreDelegate!
 	@IBOutlet var directoryTitle: UITextField!
 	
 	
 	@IBAction func addDirectory(_ sender: UIButton) {
 		
 		
-		self.updateCollection.addTodoList(directoryTitle.text ?? "")
+		self.categoryStoreDelegate.addCategory(directoryTitle.text ?? "")
 		navigationController?.popViewController(animated: true)
 	}
 	

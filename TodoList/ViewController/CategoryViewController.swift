@@ -12,6 +12,7 @@ class CategoryViewCntroller: UIViewController {
 	
 	
 	@IBOutlet var addButton: UIButton!
+	@IBOutlet var loadProblemView: UIView!
 	var categoryStore: CategoryStore!
 	var todoList: Category!
 	var categoryStoreDelegate: CategoryStoreDelegate!
@@ -28,7 +29,7 @@ class CategoryViewCntroller: UIViewController {
 				// the preparation in the TodoListViewController
 				break
 			case "showAddCategory":
-				let addDirectoryViewController = segue.destination as! AddDirectoryViewController
+				let addDirectoryViewController = segue.destination as! AddCategoryViewController
 				addDirectoryViewController.categoryStore = categoryStore
 				addDirectoryViewController.categoryStoreDelegate = categoryStoreDelegate
 			default:
@@ -45,9 +46,24 @@ class CategoryViewCntroller: UIViewController {
 									  selector: #selector(reloadCollection(_:)),
 									  name: Notification.Name(rawValue: "directoryLoaded"),
 									  object: nil)
+		notificatioCenter.addObserver(self,
+									  selector: #selector(failLoadData(_:)),
+									  name: Notification.Name(rawValue: "failLoadData"),
+									  object: nil)
 		
 		
-  }
+		
+	}
+	
+	@objc func failLoadData(_ notification: Notification){
+		OperationQueue.main.addOperation {
+			self.loadProblemView.isHidden = false
+		}
+		let when = DispatchTime.now() + 5
+		DispatchQueue.main.asyncAfter(deadline: when){
+			self.loadProblemView.isHidden = true
+		}
+	}
 	
 	@objc func reloadCollection(_ notification: Notification){
 		OperationQueue.main.addOperation {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DirectoryCollectionHeader: UICollectionReusableView {
+class CategoryCollectionHeader: UICollectionReusableView {
 	
 	@IBOutlet var createdTaskLabel: UILabel!
 	@IBOutlet var completedTaskLabel: UILabel!

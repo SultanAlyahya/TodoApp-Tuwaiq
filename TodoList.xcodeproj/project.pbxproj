@@ -18,14 +18,14 @@
 		7F2E29902550569400492F67 /* CategoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E298F2550569300492F67 /* CategoryStore.swift */; };
 		7F2E2993255056D900492F67 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E2992255056D900492F67 /* Todo.swift */; };
 		7F2E29962550577500492F67 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E29952550577500492F67 /* Category.swift */; };
-		7F2E29992550636300492F67 /* AddDirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E29982550636300492F67 /* AddDirectoryViewController.swift */; };
+		7F2E29992550636300492F67 /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E29982550636300492F67 /* AddCategoryViewController.swift */; };
 		7F2E29A1255068FB00492F67 /* CategoryStoreDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E29A0255068FB00492F67 /* CategoryStoreDelegate.swift */; };
 		7F2E29A425506E5600492F67 /* DirectoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E29A325506E5600492F67 /* DirectoryCell.swift */; };
 		7F2E29A7255097C500492F67 /* TodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E29A6255097C400492F67 /* TodoCell.swift */; };
 		7FD84CBF2550A7A900B4EDFA /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD84CBE2550A7A900B4EDFA /* TodoViewController.swift */; };
 		7FD84CC22550ABDB00B4EDFA /* CategoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD84CC12550ABDB00B4EDFA /* CategoryDelegate.swift */; };
 		7FD84CC52550AD2200B4EDFA /* AddTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD84CC42550AD2200B4EDFA /* AddTodoViewController.swift */; };
-		7FD84CC82552B41900B4EDFA /* DirectoryCollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD84CC72552B41700B4EDFA /* DirectoryCollectionHeader.swift */; };
+		7FD84CC82552B41900B4EDFA /* CategoryCollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD84CC72552B41700B4EDFA /* CategoryCollectionHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,14 +42,14 @@
 		7F2E298F2550569300492F67 /* CategoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStore.swift; sourceTree = "<group>"; };
 		7F2E2992255056D900492F67 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		7F2E29952550577500492F67 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		7F2E29982550636300492F67 /* AddDirectoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDirectoryViewController.swift; sourceTree = "<group>"; };
+		7F2E29982550636300492F67 /* AddCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
 		7F2E29A0255068FB00492F67 /* CategoryStoreDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStoreDelegate.swift; sourceTree = "<group>"; };
 		7F2E29A325506E5600492F67 /* DirectoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryCell.swift; sourceTree = "<group>"; };
 		7F2E29A6255097C400492F67 /* TodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCell.swift; sourceTree = "<group>"; };
 		7FD84CBE2550A7A900B4EDFA /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 		7FD84CC12550ABDB00B4EDFA /* CategoryDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDelegate.swift; sourceTree = "<group>"; };
 		7FD84CC42550AD2200B4EDFA /* AddTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoViewController.swift; sourceTree = "<group>"; };
-		7FD84CC72552B41700B4EDFA /* DirectoryCollectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryCollectionHeader.swift; sourceTree = "<group>"; };
+		7FD84CC72552B41700B4EDFA /* CategoryCollectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,12 +107,12 @@
 		7FD84CD1255424F200B4EDFA /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				7FD84CC72552B41700B4EDFA /* DirectoryCollectionHeader.swift */,
+				7FD84CC72552B41700B4EDFA /* CategoryCollectionHeader.swift */,
 				7FD84CC42550AD2200B4EDFA /* AddTodoViewController.swift */,
 				7FD84CBE2550A7A900B4EDFA /* TodoViewController.swift */,
 				7F2E29A6255097C400492F67 /* TodoCell.swift */,
 				7F2E29A325506E5600492F67 /* DirectoryCell.swift */,
-				7F2E29982550636300492F67 /* AddDirectoryViewController.swift */,
+				7F2E29982550636300492F67 /* AddCategoryViewController.swift */,
 				7F2E298C2550391200492F67 /* TodoListViewController.swift */,
 				7F2E2989255022A800492F67 /* CategoryViewController.swift */,
 				7F2E2976254F035D00492F67 /* CategoryListViewController.swift */,
@@ -204,7 +204,7 @@
 				7FD84CC52550AD2200B4EDFA /* AddTodoViewController.swift in Sources */,
 				7F2E298A255022A800492F67 /* CategoryViewController.swift in Sources */,
 				7F2E2977254F035D00492F67 /* CategoryListViewController.swift in Sources */,
-				7FD84CC82552B41900B4EDFA /* DirectoryCollectionHeader.swift in Sources */,
+				7FD84CC82552B41900B4EDFA /* CategoryCollectionHeader.swift in Sources */,
 				7F2E29962550577500492F67 /* Category.swift in Sources */,
 				7F2E29A425506E5600492F67 /* DirectoryCell.swift in Sources */,
 				7F2E2973254F035D00492F67 /* AppDelegate.swift in Sources */,
@@ -212,7 +212,7 @@
 				7F2E29A1255068FB00492F67 /* CategoryStoreDelegate.swift in Sources */,
 				7F2E29A7255097C500492F67 /* TodoCell.swift in Sources */,
 				7F2E2975254F035D00492F67 /* SceneDelegate.swift in Sources */,
-				7F2E29992550636300492F67 /* AddDirectoryViewController.swift in Sources */,
+				7F2E29992550636300492F67 /* AddCategoryViewController.swift in Sources */,
 				7F2E298D2550391300492F67 /* TodoListViewController.swift in Sources */,
 				7F2E29902550569400492F67 /* CategoryStore.swift in Sources */,
 				7FD84CC22550ABDB00B4EDFA /* CategoryDelegate.swift in Sources */,

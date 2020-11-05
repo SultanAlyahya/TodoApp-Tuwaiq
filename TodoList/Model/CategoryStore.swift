@@ -21,6 +21,10 @@ class CategoryStore {
 			}
 			catch {
 				print("error: \(error)")
+				let notification = Notification(name: Notification.Name(rawValue: "failLoadData"),
+												object: self,
+												userInfo: nil)
+				NotificationCenter.default.post(notification)
 			}
 			let notification = Notification(name: Notification.Name(rawValue: "directoryLoaded"),
 											object: self,

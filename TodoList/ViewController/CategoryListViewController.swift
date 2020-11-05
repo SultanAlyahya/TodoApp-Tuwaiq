@@ -11,7 +11,7 @@ class CategoryListViewController: UICollectionViewController {
 	
 	var categoryStore: CategoryStore!
 	var categoryStoreDelegate: CategoryStoreDelegate!
-	var collectionHeader: DirectoryCollectionHeader!
+	var collectionHeader: CategoryCollectionHeader!
 	var createdTasks: Int {
 		var tasks = 0
 		categoryStore.categories.forEach{
@@ -46,7 +46,7 @@ class CategoryListViewController: UICollectionViewController {
 	override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
 		switch kind {
 			case UICollectionView.elementKindSectionHeader:
-				collectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "directoryView", for: indexPath) as? DirectoryCollectionHeader
+				collectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "directoryView", for: indexPath) as? CategoryCollectionHeader
 				collectionHeader.updateData(createdTasks, completedTasks)
 				return collectionHeader
 			default:
